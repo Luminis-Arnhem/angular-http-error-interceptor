@@ -1,0 +1,30 @@
+{
+  "name": "angular-http-error-interceptor",
+  "version": "0.1.0",
+  "authors": [
+    "frankf <frank.folsche@luminis.eu>"
+  ],
+  "description": "an angular interceptor that intercepts error messages and shows a toast notification",
+  "main": "angular-http-error-interceptor.js",
+  "keywords": [
+    "interceptor",
+    "toaster",
+    "error",
+    "angular",
+    "translate"
+  ],
+  "typescript": {
+    "definition": "dist/typings/angular-http-error-interceptor.d.ts"
+  },
+  "dependencies": {
+    "angular": ">=1.2.26",
+    "AngularJS-Toaster": "toaster#~0.4.181",
+    "angular-translate": "~2.8.1"
+  },
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "license": "MIT",
+  "homepage": ""
+}

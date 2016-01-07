@@ -1,0 +1,34 @@
+{
+  "name": "angular-http-error-interceptor",
+  "version": "0.2.4",
+  "description": "an angular interceptor that intercepts error messages and shows a toast notification",
+  "repository": {
+    "type": "git",
+    "url": "https://frankf@stash.luminis.net/scm/gfh/angular-http-error-interceptor.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-bump": "^1.0.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-typescript": "^2.10.0",
+    "gulp-uglify": "^1.2.0",
+    "merge2": "^0.3.6",
+    "typescript": "^1.7.3"
+  },
+  "typescript": {
+    "definition": "dist/typings/angular-http-error-interceptor.d.ts"
+  },
+  "keywords": [
+    "interceptor",
+    "toaster",
+    "error",
+    "angular",
+    "translate"
+  ],
+  "author": "frankf <frank.folsche@luminis.eu>",
+  "license": "MIT"
+}
