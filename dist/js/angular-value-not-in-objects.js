@@ -1,6 +1,6 @@
-//Angular-translate definition file removed
-//Angular-toaster definition file removed
-//Angular definition file removed
+//Type definition file removed
+//Type definition file removed
+//Type definition file removed
 var module = angular.module('http-error-interceptor', ['translations-interceptor', 'toastr']);
 var Common;
 (function (Common) {
@@ -62,12 +62,12 @@ module.config(["$httpProvider", function ($httpProvider) {
     $httpProvider.interceptors.push('httpErrorInterceptor');
 }]);
 
-angular.module("translations-interceptor", []).config(["$translateProvider", function($translateProvider) {
-$translateProvider.translations("nl", {
-  "SERVER_ERROR": "De server heeft een fout terug gegeven: ",
-  "CONNECTION_ERROR": "Er kon geen contact worden opgenomen met de server",
-  "SERVER_ERROR_TITLE": "Fout",
-  "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden. Neem contact op met uw systeem administrator.",
-  "LOGGED_OUT_BY_SYSTEM": "Vanwege lange inactiviteit bent u uitgelogd. U wordt nu omgeleid."
-});
+angular.module("translations-interceptor", []).config(["$translateProvider", function ($translateProvider) {
+    $translateProvider.translations("nl", {
+        "SERVER_ERROR": "De server heeft een fout terug gegeven: ",
+        "CONNECTION_ERROR": "Er kon geen contact worden opgenomen met de server",
+        "SERVER_ERROR_TITLE": "Fout",
+        "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden. Neem contact op met uw systeem administrator.",
+        "LOGGED_OUT_BY_SYSTEM": "Vanwege lange inactiviteit bent u uitgelogd. U wordt nu omgeleid."
+    });
 }]);
