@@ -38,11 +38,10 @@ var Common;
                     var title = _this.$filter("translate")("SERVER_ERROR_TITLE");
                     var message = responseFailure.data.message || _this.$filter("translate")("UNKNOWN_ERROR");
                     var specificMessage = generalMessage + message;
-                    _this.toastr.error({
-                        title: specificMessage,
-                        body: title,
-                        showCloseButton: true,
-                        timeout: 0
+                    _this.toastr.error(specificMessage, title, {
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true
                     });
                 }
                 return _this.$q.reject(responseFailure);
