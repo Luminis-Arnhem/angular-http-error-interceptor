@@ -3,7 +3,7 @@ var streamqueue = require('streamqueue');
 var p = require('gulp-load-plugins')();
 
 var src = 'src';
-var appVersion = '0.1.0';
+var appVersion = '0.1.1';
 var output = 'dist';
 var typesSrc = 'typings';
 var tsScriptFiles = [typesSrc + '/**/*.ts', src + '/**/*.ts'];
@@ -35,7 +35,7 @@ var compileTS = function () {
     var translations = gulp.src(translationFiles)
       .pipe(p.angularTranslate({ module: "translations-interceptor" }));
     streamqueue({ objectMode: true }, tsResult, translations)
-        .pipe(p.concat('angular-value-not-in-objects.js'))
+        .pipe(p.concat('angular-http-error-interceptor.js'))
         .pipe(gulp.dest(output + '/js'));
 }
 gulp.task('compileTS', function () {
