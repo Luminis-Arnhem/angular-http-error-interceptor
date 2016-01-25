@@ -43,11 +43,10 @@ module Common {
                 var title: string = this.$filter("translate")("SERVER_ERROR_TITLE");
                 var message: string = responseFailure.data.message || this.$filter("translate")("UNKNOWN_ERROR");
                 var specificMessage: string = generalMessage + message;
-                this.toastr.error({
-                    title: specificMessage,
-                    body: title,
-                    showCloseButton: true,
-                    timeout: 0
+                (<any>this.toastr).error(specificMessage, title, {
+                    timeOut: 0,
+                    extendedTimeOut: 0,
+                    closeButton: true
                 });
             }
             return this.$q.reject(responseFailure);
