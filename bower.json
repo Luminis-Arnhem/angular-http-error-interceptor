@@ -26,5 +26,8 @@
     "bower_components"
   ],
   "license": "MIT",
-  "homepage": ""
+  "homepage": "",
+  "resolutions": {
+    "angular": "1.5.3"
+  }
 }
