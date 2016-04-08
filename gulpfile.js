@@ -1,6 +1,7 @@
 ﻿var gulp = require('gulp');
 var streamqueue = require('streamqueue');
 var p = require('gulp-load-plugins')();
+var args = require('yargs').argv;
 
 var config = require('./gulp.config.js')();
 
@@ -51,10 +52,35 @@ gulp.task('clean', function () {
     return gulp.src([config.output], { read: false })
 		.pipe(p.clean());
 });
-gulp.task('setVersion', function () {
-    gulp.src(config.versionFiles)
-        .pipe(p.bump({ version: config.appVersion }))
-        .pipe(gulp.dest('./'));
+
+/**
+ * Bump the version
+ * --type=pre will bump the prerelease version *.*.*-x
+ * --type=patch or no flag will bump the patch version *.*.x
+ * --type=minor will bump the minor version *.x.*
+ * --type=major will bump the major version x.*.*
+ * --appVersion=1.2.3 will bump to a specific version and ignore other flags
+ */
+gulp.task('bump', ['compileTS'], function () {
+    var msg = 'Bumping versions';
+    var type = args.type;
+    var version = args.appVersion;
+    var options = {};
+    if (version || type) {
+        if (version) {
+            options.version = version;
+            msg += ' to ' + version;
+        } else {
+            options.type = type;
+            msg += ' for a ' + type;
+        }
+        gulp.src(config.versionFiles)
+            .pipe(p.bump(options))
+            .pipe(gulp.dest('./'))
+            .pipe(p.git.commit('bumps package version'))
+            .pipe(p.filter('package.json'))
+            .pipe(p.tagVersion());
+    }
 });
 
 gulp.task('clean-example', function () {
@@ -70,6 +96,6 @@ gulp.task('compile-example', ['clean-example'], function () {
     .pipe(gulp.dest('example'));
 });
 
-gulp.task('default', ['clean', 'setVersion'], function () {
-    return gulp.start('compileTS');
+gulp.task('default', ['clean'], function () {
+    return gulp.start('bump');
 });
