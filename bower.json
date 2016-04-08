@@ -19,7 +19,7 @@
   "dependencies": {
     "angular": ">=1.2.26",
     "angular-translate": "~2.8.1",
-    "angular-toastr": "^1.7.0"
+    "angular-toastr": "^1.6.0"
   },
   "ignore": [
     "node_modules",

@@ -22,6 +22,8 @@
 </head>
 <body ng-controller="ExampleCtrl as example">
     <h1>Example of Angular Http Error Interceptor</h1>
-    <button ng-click="example.doRequest()">Get request to unfindable Url</button>
+    <button ng-click="example.do400Request()">Get request to page which returns 400</button><br /><br />
+    <button ng-click="example.do401Request()">Get request to page which returns 401</button><br /><br />
+    <button ng-click="example.do404Request()">Get request to page which returns 404</button><br /><br />
 </body>
 </html>
