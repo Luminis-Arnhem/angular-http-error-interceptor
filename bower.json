@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "angular": ">=1.2.26",
-    "AngularJS-Toaster": "toaster#~0.4.181",
-    "angular-translate": "~2.8.1"
+    "angular-translate": "~2.8.1",
+    "angular-toastr": "^1.7.0"
   },
   "ignore": [
     "node_modules",

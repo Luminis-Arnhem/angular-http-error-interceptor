@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="main">
+<head>
+    <title>Example</title>
+	<meta charset="utf-8" />
+    <!-- CSS -->
+    <link href="../bower_components/angular-toastr/dist/angular-toastr.css" rel="stylesheet" />
+
+    <!-- lib -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
+    <!-- app script -->
+    <script src="app.js"></script>
+
+    <!-- this component -->
+    <script src="../dist/js/angular-http-error-interceptor.js"></script>
+
+    <!-- controllers -->
+    <script src="exampleCtrl.js"></script>
+</head>
+<body ng-controller="ExampleCtrl as example">
+    <h1>Example of Angular Http Error Interceptor</h1>
+    <button ng-click="example.doRequest()">Get request to unfindable Url</button>
+</body>
+</html>

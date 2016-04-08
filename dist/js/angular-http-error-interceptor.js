@@ -22,7 +22,7 @@
 //Type definition file removed
 //Type definition file removed
 //Type definition file removed
-var module = angular.module('http-error-interceptor', ['translations-interceptor', 'toastr']);
+var module = angular.module('http-error-interceptor', ['pascalprecht.translate', 'translations-interceptor', 'toastr']);
 var Common;
 (function (Common) {
     var HttpErrorInterceptor = (function () {
@@ -78,11 +78,22 @@ var Common;
 })(Common || (Common = {}));
 ;
 module.factory("httpErrorInterceptor", Common.HttpErrorInterceptor.Factory);
-module.config(["$httpProvider", function ($httpProvider) {
+module.config(["$httpProvider", "$translateProvider", function ($httpProvider, $translateProvider) {
     $httpProvider.interceptors.push('httpErrorInterceptor');
+    $translateProvider.preferredLanguage('nl');
+    $translateProvider.useSanitizeValueStrategy('escaped');
 }]);
 
 angular.module("translations-interceptor", []).config(["$translateProvider", function($translateProvider) {
+$translateProvider.translations("en", {
+  "SERVER_ERROR": "The server returned an error: ",
+  "CONNECTION_ERROR": "Could not connect to server",
+  "SERVER_ERROR_TITLE": "Error",
+  "UNKNOWN_ERROR": "An unknown error has occurred. Please contact your system administrator.",
+  "LOGGED_OUT_BY_SYSTEM": "You're logged out due to long inactivity. You'll be redirected"
+}
+);
+
 $translateProvider.translations("nl", {
   "SERVER_ERROR": "De server heeft een fout terug gegeven: ",
   "CONNECTION_ERROR": "Er kon geen contact worden opgenomen met de server",

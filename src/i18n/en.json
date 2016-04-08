@@ -1,0 +1,7 @@
+﻿{
+  "SERVER_ERROR": "The server returned an error: ",
+  "CONNECTION_ERROR": "Could not connect to server",
+  "SERVER_ERROR_TITLE": "Error",
+  "UNKNOWN_ERROR": "An unknown error has occurred. Please contact your system administrator.",
+  "LOGGED_OUT_BY_SYSTEM": "You're logged out due to long inactivity. You'll be redirected"
+}

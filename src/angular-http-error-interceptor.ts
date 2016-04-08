@@ -1,7 +1,7 @@
 ﻿/// <reference path="../typings/angular-translate/angular-translate.d.ts" />
 /// <reference path="../typings/angularjs-toaster/angularjs-toaster.d.ts" />
 /// <reference path="../typings/angularjs/angular.d.ts" />
-var module: angular.IModule = angular.module('http-error-interceptor', ['translations-interceptor', 'toastr']);
+var module: angular.IModule = angular.module('http-error-interceptor', ['pascalprecht.translate', 'translations-interceptor', 'toastr']);
 module Common {
     export interface IInterceptor {
         request: Function;
@@ -54,6 +54,8 @@ module Common {
     }
 };
 module.factory("httpErrorInterceptor", Common.HttpErrorInterceptor.Factory);
-module.config(($httpProvider: angular.IHttpProvider) => {
+module.config(($httpProvider: angular.IHttpProvider, $translateProvider: ng.translate.ITranslateProvider) => {
     $httpProvider.interceptors.push('httpErrorInterceptor');
+    $translateProvider.preferredLanguage('nl');
+    $translateProvider.useSanitizeValueStrategy('escaped');
 });

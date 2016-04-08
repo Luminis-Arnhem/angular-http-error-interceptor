@@ -22,7 +22,7 @@
 //Type definition file removed
 //Type definition file removed
 //Type definition file removed
-var module: angular.IModule = angular.module('http-error-interceptor', ['translations-interceptor', 'toastr']);
+var module: angular.IModule = angular.module('http-error-interceptor', ['pascalprecht.translate', 'translations-interceptor', 'toastr']);
 module Common {
     export interface IInterceptor {
         request: Function;
@@ -75,6 +75,8 @@ module Common {
     }
 };
 module.factory("httpErrorInterceptor", Common.HttpErrorInterceptor.Factory);
-module.config(($httpProvider: angular.IHttpProvider) => {
+module.config(($httpProvider: angular.IHttpProvider, $translateProvider: ng.translate.ITranslateProvider) => {
     $httpProvider.interceptors.push('httpErrorInterceptor');
+    $translateProvider.preferredLanguage('nl');
+    $translateProvider.useSanitizeValueStrategy('escaped');
 });
