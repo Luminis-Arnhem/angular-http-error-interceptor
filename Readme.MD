@@ -5,10 +5,23 @@ Optionally add typescript definition file dist/typings/angular-http-error-interc
 ```javascript
 var app = angular.module('exampleApp', ['http-error-interceptor']);
 ```
+Optionally change language
 
+TypeScript:
+```typescript
+main.config(($translateProvider: ng.translate.ITranslateProvider) => {
+    $translateProvider.preferredLanguage('en');
+});
+```
+JavaScript:
+```javascript
+app.main.config(["$translateProvider", function ($translateProvider) {
+    $translateProvider.preferredLanguage('en');
+}]);
+```
 #Features
-shows toast notifications based on the translation files.
-error codes currently supported:
+Shows toast notifications based on the translation files.
+Error codes currently supported:
 
 | Error         | Message
 | ------------- |:-------------:|
@@ -17,7 +30,7 @@ error codes currently supported:
 | responseError | SERVER_ERROR
 #Languages
 1. NL
-
+2. EN
 #Develop
 npm install
 
@@ -27,4 +40,3 @@ tsd install
 
 #Release
 gulp
-
