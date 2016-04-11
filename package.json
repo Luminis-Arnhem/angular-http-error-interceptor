@@ -1,6 +1,6 @@
 {
   "name": "angular-http-error-interceptor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "an angular interceptor that intercepts error messages and shows a toast notification",
   "repository": {
     "type": "git",
