@@ -1,6 +1,6 @@
 {
   "name": "angular-http-error-interceptor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "frankf <frank.folsche@luminis.eu>"
   ],
@@ -23,7 +23,11 @@
   },
   "ignore": [
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "example",
+    "src",
+    "typings",
+    "!dist/typings"
   ],
   "license": "MIT",
   "homepage": "",
