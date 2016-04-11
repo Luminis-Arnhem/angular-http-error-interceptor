@@ -80,3 +80,21 @@ module.config(($httpProvider: angular.IHttpProvider, $translateProvider: ng.tran
     $translateProvider.preferredLanguage('nl');
     $translateProvider.useSanitizeValueStrategy('escaped');
 });
+angular.module("translations-interceptor", []).config(["$translateProvider", function($translateProvider) {
+$translateProvider.translations("en", {
+  "SERVER_ERROR": "The server returned an error: ",
+  "CONNECTION_ERROR": "Could not connect to server",
+  "SERVER_ERROR_TITLE": "Error",
+  "UNKNOWN_ERROR": "An unknown error has occurred. Please contact your system administrator.",
+  "LOGGED_OUT_BY_SYSTEM": "You're logged out due to long inactivity. You'll be redirected"
+}
+);
+
+$translateProvider.translations("nl", {
+  "SERVER_ERROR": "De server heeft een fout terug gegeven: ",
+  "CONNECTION_ERROR": "Er kon geen contact worden opgenomen met de server",
+  "SERVER_ERROR_TITLE": "Fout",
+  "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden. Neem contact op met uw systeem administrator.",
+  "LOGGED_OUT_BY_SYSTEM": "Vanwege lange inactiviteit bent u uitgelogd. U wordt nu omgeleid."
+});
+}]);

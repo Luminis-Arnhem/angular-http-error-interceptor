@@ -5,9 +5,11 @@ var args = require('yargs').argv;
 
 var config = require('./gulp.config.js')();
 
+var removeReferencePathsRegExp = new RegExp('/// <reference path=".*" />', "g");
+
 var tsProject = p.typescript.createProject({
     declaration: true,
-    noExternalResolve: true,
+    noExternalResolve: false,
     module: "system",
     target: "ES5",
     sortOutput: true
@@ -18,25 +20,31 @@ var copy = function (source) {
         .pipe(gulp.dest(config.output));
 };
 
-var compileTS = function () {
-    var tsFilter = p.filter('src/**/*.ts', { restore: true });
-    var tsResult = gulp.src(config.tsScriptFiles)
-        .pipe(p.replace(new RegExp('/// <reference path=".*" />', "g"), '//Type definition file removed'))
-        .pipe(tsFilter)
-        .pipe(p.license('MIT', { tiny: false, organization: 'Luminis' }))
-        .pipe(gulp.dest('./dist/ts/'))
-        .pipe(tsFilter.restore)
-        .pipe(p.typescript(tsProject));
+function getStreamingQueueWithTranslationFilesAndTS() {
+    var translations = gulp.src(config.translationFiles)
+                           .pipe(p.angularTranslate({ module: "translations-interceptor" }));
+    var ts = gulp.src('./src/angular-http-error-interceptor.ts');
+    return streamqueue({ objectMode: true }, ts, translations)
+        .pipe(p.concat('angular-http-error-interceptor.ts'))
+        .pipe(p.license('MIT', { tiny: false, organization: 'Luminis' }));
+}
+
+gulp.task('create-dist-ts-file', function () {
+    var tsResult = getStreamingQueueWithTranslationFilesAndTS()
+        .pipe(p.replace(removeReferencePathsRegExp, '//Type definition file removed'))
+        .pipe(gulp.dest('dist/ts'));   
+});
+
+gulp.task('create-dist-js-file', ['create-dist-ts-file'], function () {
+    var tsResult = getStreamingQueueWithTranslationFilesAndTS()
+        .pipe(p.typescript(tsProject))
     tsResult.dts
+        .pipe(p.replace(removeReferencePathsRegExp, '//Type definition file removed'))
         .pipe(gulp.dest(config.output + '/typings'));
     tsResult.js
+        .pipe(p.replace(removeReferencePathsRegExp, '//Type definition file removed'))
         .pipe(p.ngAnnotate())
-
-    var translations = gulp.src(config.translationFiles)
-      .pipe(p.angularTranslate({ module: "translations-interceptor" }));
-    streamqueue({ objectMode: true }, tsResult, translations)
-        .pipe(p.concat('angular-http-error-interceptor.js'))
-        .pipe(gulp.dest(config.output + '/js'))
+        .pipe(gulp.dest('./dist/js'))
         .pipe(p.uglify({
             preserveComments: 'license'
         }))
@@ -44,7 +52,8 @@ var compileTS = function () {
             path.basename += ".min";
         }))
         .pipe(gulp.dest('./dist/js/'));
-}
+});
+
 gulp.task('compileTS', function () {
     return compileTS();
 });
@@ -61,7 +70,7 @@ gulp.task('clean', function () {
  * --type=major will bump the major version x.*.*
  * --appVersion=1.2.3 will bump to a specific version and ignore other flags
  */
-gulp.task('bump', ['compileTS'], function () {
+gulp.task('bump', ['create-dist-js-file'], function () {
     var msg = 'Bumping versions';
     var type = args.type;
     var version = args.appVersion;

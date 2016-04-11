@@ -1,3 +1,6 @@
+//Type definition file removed
+//Type definition file removed
+//Type definition file removed
 /*!
  * Copyright (c) 2016 Luminis
  *
