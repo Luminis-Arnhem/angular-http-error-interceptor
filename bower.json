@@ -27,7 +27,10 @@
     "example",
     "src",
     "typings",
-    "!dist/typings"
+    "!dist/typings",
+    ".gitignore",
+    "gulpfile.js",
+    "gulp.config.js"
   ],
   "license": "MIT",
   "homepage": "",
